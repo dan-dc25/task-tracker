@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import Header from './components/Header'
 import Tasks from './components/Tasks'
+import AddTask from './components/AddTask'
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -24,6 +25,12 @@ function App() {
       reminder: false,
     }
   ])
+//Add Task
+  const addTask = (task) => {
+    const id = Math.floor(Math.random() * 1000) + 1000
+    const newTask = {id, ...task }
+    setTasks([...tasks, newTask])
+  }
 
   //Delete Task
   const deleteTask = (id) => {
@@ -38,8 +45,8 @@ function App() {
   return (
     <div className="container">
       <Header title='Task Tracker'/>
+      <AddTask />
       <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}/>
-     
     </div>
   );
 }
